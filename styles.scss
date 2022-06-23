@@ -1,35 +1,129 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
-
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
 body {
-  background-color: hsl(222, 26%, 31%);
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-color);
   font-family: 'League Spartan', sans-serif;
+}
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  --bg-color: hsl(222, 26%, 31%);
+  --bg-screen-color: hsl(224, 36%, 15%);
+  --calc-bg-color: hsl(223, 31%, 20%);
+  --key-color: hsl(30, 25%, 89%);
+  --key-bg-color: hsl(225, 21%, 49%);
+  --key-shadow-color: hsl(224, 28%, 35%);
+  --key-secondary-shadow-color: hsl(28, 16%, 65%);
+  --calc-key-hover: white;
+  --del-reset-hover: rgb(143, 159, 206);
+  --del-reset-text-color: white;
+  --key-toggle-color: hsl(6, 63%, 50%);
+  --key-equal-shadow-color: hsl(6, 70%, 34%);
+  --key-equal-hover-color: hsl(3, 100%, 68%);
+  --primary-text-color: hsl(221, 14%, 31%);
+  --secondary-text-color: white;
+  --third-text-color: white;
 }
 
 main {
   padding-top: 20vh;
   height: 100vh;
-  width: 55vw;
+  width: fit-content;
   margin: 0 auto;
 }
 
 .theme {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: end;
-  color: hsl(0, 0, 100%);
-  label {
-    padding-left: 0.5rem;
-  }
+  color: var(--secondary-text-color);
+
   span {
-    padding-right: 2rem;
+    margin-left: 7rem;
+  }
+
+  .logo {
+    font-size: 2.5rem;
+    margin-left: 0.5rem;
   }
 }
 
+.switch-number {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
 .switch-toggle {
-  background-color: hsl(223, 31%, 20%);
+  background-color: var(--calc-bg-color);
   padding: 0 0.1875rem;
   width: fit-content;
-  height: 1.25rem;
+  height: 1.6rem;
   margin: 0;
   border-radius: 1.5625rem;
 
@@ -38,22 +132,22 @@ main {
     -moz-appearance: none;
     appearance: none;
     margin: 0.1875rem 0.125rem;
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 50%;
     cursor: pointer;
 
     &:checked {
-      background-color: hsl(6, 63%, 50%);
+      background-color: var(--key-toggle-color);
     }
   }
 }
 
 .calculator-screen {
-  background-color: hsl(224, 36%, 15%);
+  background-color: var(--bg-screen-color);
   font-size: 2.3rem;
   text-align: end;
-  color: hsl(0, 0, 100%);
+  color: var(--secondary-text-color);
   height: 13vh;
   line-height: 13vh;
   width: 100%;
@@ -67,13 +161,12 @@ main {
 }
 
 .calculator-keys {
-  background-color: hsl(223, 31%, 20%);
+  background-color: var(--calc-bg-color);
   display: grid;
   padding: 2em;
   border-radius: 0.6rem;
-  grid-template-columns: repeat(4, minmax(0.6rem, 1fr));
+  grid-template-columns: repeat(4, minmax(3.5rem, 1fr));
   gap: 1em;
-  
 
   .reset {
     grid-column: 1 / span 2;
@@ -87,12 +180,14 @@ main {
 button {
   font-weight: bold;
   font-size: 2rem;
-  height: 3.75rem;
-  background-color: rgb(207, 207, 207);
-  border-radius: 0.3rem;
+  height: 3.5rem;
+  background-color: var(--key-color);
+  border-radius: 0.5rem;
   border: none;
-  color: #333;
-  box-shadow: 0px 0.26rem hsl(0, 0%, 38%);
+  text-align: center;
+  line-height: 3.5rem;
+  color: var(--primary-text-color);
+  box-shadow: 0px 4px var(--key-secondary-shadow-color);
 }
 
 .delete,
@@ -101,47 +196,47 @@ button {
 }
 
 button:hover {
-  background-color: #ffffff;
+  background-color: var(--calc-key-hover);
 }
 
 .delete {
-  background-color: hsl(225, 21%, 49%);
+  background-color: var(--key-bg-color);
   border: none;
-  color: #fff;
-  box-shadow: 0px 0.25 hsl(224, 28%, 35%);
+  color: var(--del-reset-text-color);
+  box-shadow: 0px 4px var(--key-shadow-color);
 }
 
 .delete:hover {
-  background-color: rgb(143, 159, 206);
+  background-color: var(--del-reset-hover);
 }
 
 .reset {
-  background-color: hsl(225, 21%, 49%);
+  background-color: var(--key-bg-color);
   border: none;
-  color: #fff;
-  box-shadow: 0px 0.25 hsl(224, 28%, 35%);
+  color: var(--del-reset-text-color);
+  box-shadow: 0px 4px var(--key-shadow-color);
 }
 
 .reset:hover {
-  background-color: rgb(143, 159, 206);
+  background-color: var(--del-reset-hover);
 }
 
 .equal-sign {
-  background-color: hsl(15, 100%, 51%);
-  color: white;
-  box-shadow: 0px 0.25 hsl(6, 70%, 34%);
+  background-color: var(--key-toggle-color);
+  color: var(--third-text-color);
+  box-shadow: 0px 4px var(--key-equal-shadow-color);
 }
 
 .equal-sign:hover {
-  background-color: hsl(22, 100%, 68%);
+  background-color: var(--key-equal-hover-color);
 }
 
 @media screen and (max-width: 430px) {
   body {
-    margin: 1.4rem;
+    margin: 1rem;
   }
   main {
-    width: 100%;
+    width: max-content;
     padding-top: 2vh;
   }
 }

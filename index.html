@@ -9,16 +9,17 @@
     />
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
   </head>
   <body>
     <main>
-      <span>calc</span>
-
       <div class="theme">
+        <span class="logo">calc</span>
+
         <span>THEME</span>
 
         <div>
-          <div>
+          <div class="switch-number">
             <label for="theme-1">1</label>
             <label for="theme-2">2</label>
             <label for="theme-3">3</label>
@@ -26,14 +27,25 @@
           <div class="switch-toggle">
             <input
               type="radio"
+              value="1"
               id="theme-1"
               name="theme"
               checked
             />
 
-            <input type="radio" id="theme-2" name="theme" />
+            <input
+              type="radio"
+              value="2"
+              id="theme-2"
+              name="theme"
+            />
 
-            <input type="radio" id="theme-3" name="theme" />
+            <input
+              type="radio"
+              value="3"
+              id="theme-3"
+              name="theme"
+            />
           </div>
         </div>
       </div>
