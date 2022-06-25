@@ -95,10 +95,12 @@ delInput.onclick = function () {
 
 operators.forEach((o) => {
   o.onclick = function () {
-    if (operator === '') {
+    if (operator === '' || secondValue === '0') {
       operator = o.innerText;
-      screen.innerText += operator;
-    } else if ((firstValue, secondValue, operator)) {
+      screen.innerText = `${parseValues(
+        firstValue
+      )}${operator}`;
+    } else if (Number(secondValue) && operator) {
       const result = eval(
         `${firstValue}${
           operator === 'x' ? '*' : operator
