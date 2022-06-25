@@ -49,6 +49,10 @@ reset.onclick = function () {
 
 equal.onclick = function () {
   if (firstValue && secondValue && operator) {
+    if (operator === '/' && secondValue === '0') {
+      screen.innerText = 'Error';
+      return
+    };
     const result = String(
       eval(
         `${firstValue}${
@@ -96,6 +100,7 @@ delInput.onclick = function () {
 operators.forEach((o) => {
   o.onclick = function () {
     if (operator === '' || secondValue === '0') {
+
       operator = o.innerText;
       screen.innerText = `${parseValues(
         firstValue
