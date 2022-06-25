@@ -2,6 +2,145 @@ const inputs = document.querySelectorAll(
   'input[type="radio"]'
 );
 
+const numbers = document.querySelectorAll('.number');
+
+const operators = document.querySelectorAll('.operator');
+
+const delInput = document.querySelector('.delete');
+
+const reset = document.querySelector('.reset');
+
+const screen = document.querySelector(
+  '.calculator-screen > span'
+);
+
+const decimal = document.querySelector('.decimal');
+
+const equal = document.querySelector('.equal-sign');
+
+let firstValue = '0';
+let secondValue = '0';
+let operator = '';
+
+decimal.onclick = function () {
+  if (operator === '') {
+    if (firstValue.length === 0) {
+      firstValue = '0.';
+    } else if (firstValue.indexOf('.') === -1) {
+      firstValue += '.';
+    }
+    screen.innerText = firstValue;
+  } else {
+    if (secondValue.length === 0) {
+      secondValue = '0.';
+    } else if (secondValue.indexOf('.') === -1) {
+      secondValue += '.';
+    }
+    screen.innerText = `${firstValue}${operator}${secondValue}`;
+  }
+};
+
+reset.onclick = function () {
+  firstValue = '0';
+  secondValue = '0';
+  operator = '';
+  screen.innerText = '0';
+};
+
+equal.onclick = function () {
+  if (firstValue && secondValue && operator) {
+    const result = String(
+      eval(
+        `${firstValue}${
+          operator === 'x' ? '*' : operator
+        }${secondValue}`
+      )
+    );
+    firstValue = result;
+    secondValue = '';
+    operator = '';
+    screen.innerText = parseValues(result);
+  }
+};
+function parseValues(value) {
+  return Number(value.replace(/,/g, '')).toLocaleString(
+    'en-US'
+  );
+}
+
+delInput.onclick = function () {
+  let slice;
+  if (operator === '') {
+    slice = screen.innerText.slice(0, -1);
+    firstValue = parseValues(slice);
+    screen.innerText = firstValue;
+  } else {
+    slice = screen.innerText
+      .split(operator)[1]
+      .slice(0, -1);
+
+    if (secondValue.length === 0) {
+      operator = '';
+    }
+    secondValue = slice;
+    screen.innerText = `${parseValues(
+      firstValue
+    )}${operator}${
+      parseValues(secondValue) === '0'
+        ? ''
+        : parseValues(secondValue)
+    }`;
+  }
+};
+
+operators.forEach((o) => {
+  o.onclick = function () {
+    if (operator === '') {
+      operator = o.innerText;
+      screen.innerText += operator;
+    } else if ((firstValue, secondValue, operator)) {
+      const result = eval(
+        `${firstValue}${
+          operator === 'x' ? '*' : operator
+        }${secondValue}`
+      );
+      firstValue = String(result);
+      secondValue = '';
+      operator = o.innerText;
+      screen.innerText = parseValues(firstValue) + operator;
+    }
+  };
+});
+
+numbers.forEach((number) => {
+  number.onclick = function () {
+    if (screen.innerText.length >= 13) return;
+    if (operator === '') {
+      if (
+        firstValue === '0' &&
+        firstValue.indexOf('.') === -1
+      ) {
+        firstValue = number.innerText;
+      } else {
+        firstValue += number.innerText;
+      }
+      screen.innerText = parseValues(firstValue);
+    } else {
+      if (
+        secondValue === '0' &&
+        secondValue.indexOf('.') === -1
+      ) {
+        secondValue = number.innerText;
+      } else {
+        secondValue += number.innerText;
+      }
+      screen.innerText = `${parseValues(
+        firstValue
+      )}${operator}${parseValues(secondValue)}`;
+    }
+  };
+});
+
 const CSS_VARIABLES = {
   bgColor: '--bg-color',
   bgCalcColor: '--calc-bg-color',

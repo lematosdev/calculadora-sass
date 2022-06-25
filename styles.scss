@@ -91,7 +91,8 @@ h6 {
 }
 
 main {
-  padding-top: 20vh;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
   height: 100vh;
   width: fit-content;
   margin: 0 auto;
@@ -190,6 +191,10 @@ button {
   box-shadow: 0px 4px var(--key-secondary-shadow-color);
 }
 
+button:active {
+  transform: translateY(4px);
+  }
+
 .delete,
 .reset {
   font-size: 1rem;
@@ -206,7 +211,7 @@ button:hover {
   box-shadow: 0px 4px var(--key-shadow-color);
 }
 
-.delete:hover {
+.delete:hover, .delete:active {
   background-color: var(--del-reset-hover);
 }
 
@@ -217,7 +222,7 @@ button:hover {
   box-shadow: 0px 4px var(--key-shadow-color);
 }
 
-.reset:hover {
+.reset:hover, .reset:active {
   background-color: var(--del-reset-hover);
 }
 
@@ -227,7 +232,7 @@ button:hover {
   box-shadow: 0px 4px var(--key-equal-shadow-color);
 }
 
-.equal-sign:hover {
+.equal-sign:hover, .equal-sign:active {
   background-color: var(--key-equal-hover-color);
 }
 
@@ -236,7 +241,8 @@ button:hover {
     margin: 1rem;
   }
   main {
+    height: auto;
     width: max-content;
-    padding-top: 2vh;
+    padding: 5vh 0;
   }
 }
