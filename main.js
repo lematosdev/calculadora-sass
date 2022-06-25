@@ -51,6 +51,9 @@ equal.onclick = function () {
   if (firstValue && secondValue && operator) {
     if (operator === '/' && secondValue === '0') {
       screen.innerText = 'Error';
+      firstValue = '0';
+      secondValue = '0';
+      operator = '';
       return
     };
     const result = String(
